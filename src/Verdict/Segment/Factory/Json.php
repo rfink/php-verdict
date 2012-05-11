@@ -45,8 +45,8 @@ class Json
     {
         function doBuild(array $data, ContextInterface $context)
         {
-            $filter = new FilterFactory($context, $data);
-            $tree = new Tree($filter);
+            $filter = new FilterFactory($context, $data['Condition']);
+            $tree = new Tree($filter->build());
             $tree->setSegmentName($data['segmentName']);
             $tree->setSegmentId($data['segmentId']);
             if (is_array($data['children']))
@@ -58,6 +58,7 @@ class Json
                     $tree->addChild($segment);
                 }
             }
+            return $tree;
         }
         return doBuild($this->data, $this->context);
     }

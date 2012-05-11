@@ -33,10 +33,10 @@ abstract class ComparisonAbstract
 	 * @param CubeAbstract  $cube
 	 * @param ArrayIterator $params
 	 */
-	public function __construct(ContextInterface $context, $contextKey, ArrayIterator $params)
+	public function __construct(ContextInterface $context, $contextKey = null, ArrayIterator $params = null)
     {
         $this->contextKey = $contextKey;
-		$this->params = $params;
+		$this->params = isset($params) ? $params : new ArrayIterator();
 		// Iterate and make sure we have all the necessary parameters
 		foreach ($this->requiredParams as $requiredParam)
         {

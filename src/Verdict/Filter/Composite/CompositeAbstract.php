@@ -13,8 +13,16 @@ use Verdict\Filter\FilterInterface,
 	InvalidArgumentException;
 
 abstract class CompositeAbstract {
+    /**
+     *
+     * @var type 
+     */
 	protected $items;
 
+    /**
+     *
+     * @param ArrayIterator $items 
+     */
 	public function __construct(ArrayIterator $items = null) {
 		if (isset($items)) {
 			$this->setItems($items);
@@ -23,6 +31,11 @@ abstract class CompositeAbstract {
 		}
 	}
 
+    /**
+     *
+     * @param ArrayIterator $items
+     * @return CompositeAbstract 
+     */
 	public function setItems(ArrayIterator $items) {
 		if (!$items->count()) {
 			throw new InvalidArgumentException('Items must contain at least one element');
@@ -37,11 +50,20 @@ abstract class CompositeAbstract {
 		return $this;
 	}
 
+    /**
+     *
+     * @param FilterInterface $filter
+     * @return CompositeAbstract 
+     */
 	public function addItem(FilterInterface $filter) {
 		$this->items->append($filter);
 		return $this;
 	}
 	
+    /**
+     *
+     * @return type 
+     */
 	public function getItems() {
 		return $this->items;
 	}

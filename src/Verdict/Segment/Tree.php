@@ -40,13 +40,13 @@ class Tree implements SegmentInterface
         return $this;
     }
     
-    public function setParent(Segment $parent)
+    public function setParent(Tree $parent)
     {
         $this->parent = $parent;
         return $this;
     }
     
-    public function addChild(Segment $child)
+    public function addChild(Tree $child)
     {
         $this->children[] = $child;
         return $this;

@@ -23,7 +23,7 @@ class StringContains extends ComparisonAbstract implements FilterInterface
     /**
      * 
      */
-	public function evaulate()
+	public function evaluate()
 	{
 		return (stripos($this->context->getValue($this->contextKey), $this->params['configValue']) !== false);
 	}

@@ -7,6 +7,7 @@
 namespace Verdict\Filter\Factory;
 
 use Verdict\Context\ContextInterface,
+    Verdict\Filter\Comparison\Truth,
     ArrayIterator,
     ReflectionClass,
     JSON_ERROR_NONE,
@@ -33,8 +34,13 @@ class Json implements FactoryInterface
      */
     public function __construct(ContextInterface $context, $json)
     {
+        $this->context = $context;
+        if (!isset($json))
+        {
+            return;
+        }
         // Quick type checking
-        if (!is_string($json) || !is_array($json))
+        if (!is_string($json) && !is_array($json))
         {
             throw new InvalidArgumentException('JSON must be a string or array');
         }
@@ -51,7 +57,6 @@ class Json implements FactoryInterface
         {
             $this->data = $json;
         }
-        $this->context = $context;
     }
     
     /**
@@ -60,6 +65,10 @@ class Json implements FactoryInterface
      */
     public function build()
     {
+        if (empty($this->data))
+        {
+            return new Truth($this->context);
+        }
         return $this->getObject($this->data);
     }
     
@@ -89,7 +98,7 @@ class Json implements FactoryInterface
                 $reflect = new ReflectionClass('\\Verdict\\Filter\Comparison\\' . ucfirst($data['nodeDriver']));
                 $properties = new ArrayIterator();
                 // First, check if we have configured a 'config value'
-                if (array_key_exits('configValue', $data))
+                if (array_key_exists('configValue', $data))
                 {
                     $properties['configValue'] = $data['configValue'];
                 }

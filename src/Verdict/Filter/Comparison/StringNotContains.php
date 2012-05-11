@@ -10,7 +10,7 @@ namespace Verdict\Filter\Comparison;
 
 use Verdict\Filter\FilterInterface;
 
-class StringContains extends ComparisonAbstract implements FilterInterface
+class StringNotContains extends ComparisonAbstract implements FilterInterface
 {
 	/**
 	 * Required parameters for operation
