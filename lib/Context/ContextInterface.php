@@ -13,7 +13,7 @@ interface ContextInterface
      * @param string $key
      * @return string
      */
-    public function get_value($key);
+    public function getValue($key);
     
     /**
      * Set value with the given key/val
@@ -21,5 +21,5 @@ interface ContextInterface
      * @param mixed $value
      * @return ContextInterface
      */
-    public function set_value($key, $value);
+    public function setValue($key, $value);
 }
