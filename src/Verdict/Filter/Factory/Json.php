@@ -87,7 +87,21 @@ class Json implements FactoryInterface
                 break;
             case 'comparison':
                 $reflect = new ReflectionClass('\\Verdict\\Filter\Comparison\\' . ucfirst($data['nodeDriver']));
-                return $reflect->newInstance($this->context);
+                $properties = new ArrayIterator();
+                // First, check if we have configured a 'config value'
+                if (array_key_exits('configValue', $data))
+                {
+                    $properties['configValue'] = $data['configValue'];
+                }
+                // Other params to the method call, attach them to our array
+                if (is_array($data['params']))
+                {
+                    foreach ($data['params'] as $key => $val)
+                    {
+                        $properties[$key] = $val;
+                    }
+                }
+                return $reflect->newInstance($this->context, $data['contextKey'], $properties);
                 break;
             default:
                 throw new RuntimeException('nodeType must be either composite or comparison');

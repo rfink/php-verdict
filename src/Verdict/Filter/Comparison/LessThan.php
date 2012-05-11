@@ -6,11 +6,11 @@
  * @since   April 16, 2012
  */
 
-namespace Saiku\Filter\Comparison;
+namespace Verdict\Filter\Comparison;
 
-use Saiku\Filter\FilterInterface;
+use Verdict\Filter\FilterInterface;
 
-class Equals extends ComparisonAbstract implements FilterInterface {
+class LessThan extends ComparisonAbstract implements FilterInterface {
 	/**
 	 * Required parameters for operation
 	 * @var array
@@ -19,11 +19,10 @@ class Equals extends ComparisonAbstract implements FilterInterface {
 		'configValue'
 	);
 
-	/**
-	 * 
-	 * @return DOMElement
-	 */
-	public function toMDX() {
-		
+    /**
+     * 
+     */
+	public function evaulate() {
+		return $this->context->getValue($this->contextKey) < $this->params['configValue'];
 	}
 }

@@ -12,6 +12,11 @@ use Verdict\Context\ContextInterface,
 
 abstract class ComparisonAbstract
 {
+    /**
+     * Context key from context to evaulate on
+     * @var string
+     */
+    protected $contextKey;
 	/**
 	 * Array of parameters
 	 * @var ArrayIterator
@@ -28,8 +33,9 @@ abstract class ComparisonAbstract
 	 * @param CubeAbstract  $cube
 	 * @param ArrayIterator $params
 	 */
-	public function __construct(ContextInterface $context, ArrayIterator $params)
+	public function __construct(ContextInterface $context, $contextKey, ArrayIterator $params)
     {
+        $this->contextKey = $contextKey;
 		$this->params = $params;
 		// Iterate and make sure we have all the necessary parameters
 		foreach ($this->requiredParams as $requiredParam)

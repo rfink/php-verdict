@@ -1,3 +1,16 @@
 {
-    
+    "name": "Verdict",
+    "description": "Nested boolean logic compiler",
+    "homepage": "",
+    "version": "0.1.0",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Ryan Fink",
+            "email": "ryanjfink@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"Verdict": "src/"}
+    }
 }

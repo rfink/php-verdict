@@ -17,7 +17,6 @@ class Equals extends ComparisonAbstract implements FilterInterface
 	 * @var array
 	 */
 	protected $requiredParams = array(
-		'contextKey',
 		'configValue'
 	);
 
@@ -26,6 +25,6 @@ class Equals extends ComparisonAbstract implements FilterInterface
      */
 	public function evaluate()
 	{
-		
+		return $this->context->getValue($this->contextKey) == $this->params['configValue'];
 	}
 }
