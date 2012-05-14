@@ -1,7 +1,9 @@
 <?php
 
 /**
- * 
+ * Interface definition for contexts to implement, who wish to plugin to verdict.
+ * @author Ryan Fink <ryanjfink@gmail.com>
+ * @since  May 14, 2012
  */
 
 namespace Verdict\Context;

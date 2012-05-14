@@ -1,7 +1,10 @@
 <?php
 
 /**
- * 
+ * JSON specific implementation of our factory filter, takes a json string (or generic array)
+ *   and builds it into a verdict filter object.
+ * @author Ryan Fink <ryanjfink@gmail.com>
+ * @since  May 14, 2012
  */
 
 namespace Verdict\Filter\Factory;

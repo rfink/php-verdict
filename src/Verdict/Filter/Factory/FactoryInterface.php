@@ -1,7 +1,9 @@
 <?php
 
 /**
- * 
+ * Interface for our factory classes to implement.
+ * @author Ryan Fink <ryanjfink@gmail.com>
+ * @since  May 14, 2012
  */
 
 namespace Verdict\Filter\Factory;

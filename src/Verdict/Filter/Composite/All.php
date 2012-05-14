@@ -12,10 +12,9 @@ use Verdict\Filter\FilterInterface;
 
 class All extends CompositeAbstract implements FilterInterface
 {
-	/**
-	 * Evaluate our internal items
-	 * @return boolean
-	 */
+    /**
+     * @inheritDoc
+     */
 	public function evaluate()
 	{
 		/* @var $item FilterInterface */

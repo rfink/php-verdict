@@ -10,20 +10,21 @@ namespace Verdict\Filter\Comparison;
 
 use Verdict\Filter\FilterInterface;
 
-class Range extends ComparisonAbstract implements FilterInterface {
-	/**
-	 * Required parameters for operation
-	 * @var array
-	 */
+class Range extends ComparisonAbstract implements FilterInterface
+{
+    /**
+     * @inheritDoc
+     */
 	protected $requiredParams = array(
 		'min',
         'max'
 	);
 
     /**
-     * 
+     * @inheritDoc
      */
-	public function evaluate() {
+	public function evaluate()
+    {
         $val = $this->context->getValue($this->contextKey);
 		return $val >= $this->params['min'] && $val <= $this->params['max'];
 	}

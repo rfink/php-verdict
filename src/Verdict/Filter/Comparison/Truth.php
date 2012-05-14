@@ -12,17 +12,16 @@ use Verdict\Filter\FilterInterface;
 
 class Truth extends ComparisonAbstract implements FilterInterface
 {
-	/**
-	 * Required parameters for operation
-	 * @var array
-	 */
+    /**
+     * @inheritDoc
+     */
 	protected $requiredParams = array();
 
     /**
-     * 
+     * @inheritDoc
      */
 	public function evaluate()
 	{
-		return false;
+		return true;
 	}
 }

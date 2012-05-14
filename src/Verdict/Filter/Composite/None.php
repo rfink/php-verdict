@@ -12,10 +12,9 @@ use Verdict\Filter\FilterInterface;
 
 class None extends CompositeAbstract implements FilterInterface
 {
-	/**
-	 * [toMDX description]
-	 * @return [type] [description]
-	 */
+    /**
+     * @inheritDoc
+     */
 	public function evaluate()
 	{
 		/* @var $item FilterInterface */

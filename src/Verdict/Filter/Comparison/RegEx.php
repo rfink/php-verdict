@@ -12,16 +12,15 @@ use Verdict\Filter\FilterInterface;
 
 class RegEx extends ComparisonAbstract implements FilterInterface
 {
-	/**
-	 * Required parameters for operation
-	 * @var array
-	 */
+    /**
+     * @inheritDoc
+     */
 	protected $requiredParams = array(
 		'configValue'
 	);
 
     /**
-     * 
+     * @inheritDoc
      */
 	public function evaulate()
 	{

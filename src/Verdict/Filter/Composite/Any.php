@@ -13,8 +13,7 @@ use Verdict\Filter\FilterInterface;
 class Any extends CompositeAbstract implements FilterInterface
 {
     /**
-     * Evaluate to see if any of our conditions are met
-     * @return boolean
+     * @inheritDoc
      */
 	public function evaluate()
 	{

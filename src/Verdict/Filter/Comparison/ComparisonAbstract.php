@@ -1,7 +1,10 @@
 <?php
 
 /**
- * 
+ * Abstract base class for verdict comparison objects, contains some common functionality
+ *   should you care to extend it.
+ * @author Ryan Fink <ryanjfink@gmail.com>
+ * @since  May 14, 2012
  */
 
 namespace Verdict\Filter\Comparison;
@@ -12,6 +15,11 @@ use Verdict\Context\ContextInterface,
 
 abstract class ComparisonAbstract
 {
+    /**
+     * Context object
+     * @var ContextInterface
+     */
+    protected $context;
     /**
      * Context key from context to evaulate on
      * @var string
@@ -30,11 +38,12 @@ abstract class ComparisonAbstract
 
 	/**
 	 * Instantiate with dependencies
-	 * @param CubeAbstract  $cube
+	 * @param ContextInterface $context
 	 * @param ArrayIterator $params
 	 */
 	public function __construct(ContextInterface $context, $contextKey = null, ArrayIterator $params = null)
     {
+        $this->context = $context;
         $this->contextKey = $contextKey;
 		$this->params = isset($params) ? $params : new ArrayIterator();
 		// Iterate and make sure we have all the necessary parameters
