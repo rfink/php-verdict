@@ -10,7 +10,7 @@ namespace Verdict\Filter\Comparison;
 
 use Verdict\Filter\FilterInterface;
 
-class StringNotContains extends ComparisonAbstract implements FilterInterface
+class StringNotContains extends ComparisonAbstract implements FilterInterface, ComparisonInterface
 {
     /**
      * @inheritDoc
@@ -22,9 +22,17 @@ class StringNotContains extends ComparisonAbstract implements FilterInterface
     /**
      * @inheritDoc
      */
-	public function evaulate()
+	public function evaluate()
 	{
 		return (stripos($this->context->getValue($this->contextKey), $this->params['configValue']) === false);
 	}
+    
+    /**
+     * @inheritDoc
+     */
+    public static function getDisplay()
+    {
+        return 'Not Contains';
+    }
 }
 

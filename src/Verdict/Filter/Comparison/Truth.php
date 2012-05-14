@@ -10,7 +10,7 @@ namespace Verdict\Filter\Comparison;
 
 use Verdict\Filter\FilterInterface;
 
-class Truth extends ComparisonAbstract implements FilterInterface
+class Truth extends ComparisonAbstract implements FilterInterface, ComparisonInterface
 {
     /**
      * @inheritDoc
@@ -24,4 +24,12 @@ class Truth extends ComparisonAbstract implements FilterInterface
 	{
 		return true;
 	}
+   
+    /**
+     * @inheritDoc
+     */
+    public static function getDisplay()
+    {
+        return 'Always True';
+    }
 }

@@ -10,7 +10,7 @@ namespace Verdict\Filter\Comparison;
 
 use Verdict\Filter\FilterInterface;
 
-class LessThanEqualTo extends ComparisonAbstract implements FilterInterface
+class LessThanEqualTo extends ComparisonAbstract implements FilterInterface, ComparisonInterface
 {
     /**
      * @inheritDoc
@@ -22,8 +22,16 @@ class LessThanEqualTo extends ComparisonAbstract implements FilterInterface
     /**
      * @inheritDoc
      */
-	public function evaulate()
+	public function evaluate()
     {
 		return $this->context->getValue($this->contextKey) <= $this->params['configValue'];
 	}
+    
+    /**
+     * @inheritDoc
+     */
+    public static function getDisplay()
+    {
+        return '<=';
+    }
 }

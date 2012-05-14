@@ -10,7 +10,7 @@ namespace Verdict\Filter\Comparison;
 
 use Verdict\Filter\FilterInterface;
 
-class Range extends ComparisonAbstract implements FilterInterface
+class Range extends ComparisonAbstract implements FilterInterface, ComparisonInterface
 {
     /**
      * @inheritDoc
@@ -28,4 +28,12 @@ class Range extends ComparisonAbstract implements FilterInterface
         $val = $this->context->getValue($this->contextKey);
 		return $val >= $this->params['min'] && $val <= $this->params['max'];
 	}
+    
+    /**
+     * @inheritDoc
+     */
+    public static function getDisplay()
+    {
+        return 'In Range';
+    }
 }

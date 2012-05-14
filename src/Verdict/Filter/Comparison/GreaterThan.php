@@ -10,7 +10,7 @@ namespace Verdict\Filter\Comparison;
 
 use Verdict\Filter\FilterInterface;
 
-class GreaterThan extends ComparisonAbstract implements FilterInterface
+class GreaterThan extends ComparisonAbstract implements FilterInterface, ComparisonInterface
 {
     /**
      * @inheritDoc
@@ -26,4 +26,12 @@ class GreaterThan extends ComparisonAbstract implements FilterInterface
     {
 		return $this->context->getValue($this->contextKey) > $this->params['configValue'];
 	}
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDisplay()
+    {
+        return '>';
+    }
 }

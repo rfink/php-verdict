@@ -8,6 +8,8 @@
 
 namespace Verdict\Context;
 
+use Verdict\Context\Property\PropertyInterface;
+
 interface ContextInterface
 {
     /**

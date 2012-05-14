@@ -10,7 +10,7 @@ namespace Verdict\Filter\Comparison;
 
 use Verdict\Filter\FilterInterface;
 
-class RegEx extends ComparisonAbstract implements FilterInterface
+class RegEx extends ComparisonAbstract implements FilterInterface, ComparisonInterface
 {
     /**
      * @inheritDoc
@@ -22,8 +22,16 @@ class RegEx extends ComparisonAbstract implements FilterInterface
     /**
      * @inheritDoc
      */
-	public function evaulate()
+	public function evaluate()
 	{
 		return (boolean) preg_match('/' . preg_quote($this->params['configValue'], '/') . '/', $this->context->getValue($this->contextKey));
 	}
+    
+    /**
+     * @inheritDoc
+     */
+    public static function getDisplay()
+    {
+        return 'Reg Ex';
+    }
 }

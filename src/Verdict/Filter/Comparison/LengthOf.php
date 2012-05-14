@@ -11,7 +11,7 @@ namespace Verdict\Filter\Comparison;
 use Verdict\Filter\FilterInterface,
     InvalidArgumentException;
 
-class LengthOf extends ComparisonAbstract implements FilterInterface
+class LengthOf extends ComparisonAbstract implements FilterInterface, ComparisonInterface
 {
     /**
      * @inheritDoc
@@ -23,7 +23,7 @@ class LengthOf extends ComparisonAbstract implements FilterInterface
     /**
      * @inheritDoc
      */
-	public function evaulate()
+	public function evaluate()
 	{
         $val = $this->context->getValue($this->contextKey);
         if (is_string($val))
@@ -36,5 +36,13 @@ class LengthOf extends ComparisonAbstract implements FilterInterface
         }
         throw new InvalidArgumentException('Value supplied to "lengthOf" must be an array or a string');
 	}
+
+    /**
+     * @inheritDoc
+     */
+    public static function getDisplay()
+    {
+        return 'Has Length';
+    }
 }
 

@@ -39,9 +39,10 @@ abstract class ComparisonAbstract
 	/**
 	 * Instantiate with dependencies
 	 * @param ContextInterface $context
+     * @param string $contextKey
 	 * @param ArrayIterator $params
 	 */
-	public function __construct(ContextInterface $context, $contextKey = null, ArrayIterator $params = null)
+	public function __construct(ContextInterface $context = null, $contextKey = null, ArrayIterator $params = null)
     {
         $this->context = $context;
         $this->contextKey = $contextKey;
