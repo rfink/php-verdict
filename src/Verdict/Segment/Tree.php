@@ -59,6 +59,11 @@ class Tree implements SegmentInterface
         $this->condition = $condition;
     }
     
+    public function getSegmentName()
+    {
+        return $this->segmentName;
+    }
+    
     /**
      * Set the segment name
      * @param string $name
@@ -70,6 +75,11 @@ class Tree implements SegmentInterface
         return $this;
     }
     
+    public function getSegmentId()
+    {
+        return $this->segmentId;
+    }
+    
     /**
      * Set the segment id
      * @param integer $segmentId
@@ -79,6 +89,15 @@ class Tree implements SegmentInterface
     {
         $this->segmentId = $segmentId;
         return $this;
+    }
+    
+    /**
+     * Get our condition
+     * @return FilterInterface
+     */
+    public function getCondition()
+    {
+        return $this->condition;
     }
     
     /**

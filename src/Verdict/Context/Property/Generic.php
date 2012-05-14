@@ -30,7 +30,14 @@ class Generic implements PropertyInterface, ContextInterface
             'value' => null,
             'getSource' => null,
             'getValue' => null,
-            'type' => 'string'
+            'type' => 'string',
+            'isRestrictedSet' => false,
+            'excludedDrivers' => array(
+                
+            ),
+            'includedDrivers' => array(
+                
+            )
         ), $properties);
     }
 

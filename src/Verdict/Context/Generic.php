@@ -111,6 +111,17 @@ class Generic implements ContextInterface
     }
     
     /**
+     * Set delimiter
+     * @param string $delimiter
+     * @return Generic
+     */
+    public function setDelimiter($delimiter)
+    {
+        $this->delimiter = (string) $delimiter;
+        return $this;
+    }
+    
+    /**
      * Recursive method for digging into a key and returning the nested reference
      * @param string $key
      * @return PropertyInterface

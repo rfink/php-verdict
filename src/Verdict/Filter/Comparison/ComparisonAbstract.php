@@ -56,5 +56,15 @@ abstract class ComparisonAbstract
 			}
 		}
 	}
+    
+    public function getContextKey()
+    {
+        return $this->contextKey;
+    }
+    
+    public function getParams()
+    {
+        return $this->params;
+    }
 
 }
