@@ -72,8 +72,7 @@ class Generic implements PropertyInterface, ContextInterface
     {
         if (is_callable($this->properties['getSource']))
         {
-            $reflect = new ReflectionFunction($this->properties['getSource']);
-            return $reflect->invoke($params);
+            return call_user_func($this->properties['getSource'], $params);
         }
         return null;
     }

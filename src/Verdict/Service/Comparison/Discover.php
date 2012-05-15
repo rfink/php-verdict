@@ -26,6 +26,8 @@ class Discover
         'GreaterThanEqualTo',
         'StringContains',
         'StringNotContains',
+        'ListContains',
+        'ListNotContains',
         'RegEx',
         'LengthOf',
         'Range',
@@ -71,7 +73,7 @@ class Discover
                 $className = str_replace('.php', '', $fileName);
                 $reflectClass = new ReflectionClass('\\Verdict\\Filter\\Comparison\\' . $className);
                 // Skip interfaces and abstracts
-                if (!$reflectClass->isInstantiable() || !$reflectClass->implementsInterface('\\Verdict\\Filter\\Comparison\\ComparisonInterface'))
+                if (!$reflectClass->isInstantiable() || !$reflectClass->implementsInterface('\\Verdict\\Filter\\Comparison\\ComparisonInterface') || $className === 'Truth')
                 {
                     continue;
                 }

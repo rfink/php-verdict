@@ -26,6 +26,8 @@ class NumberType implements TypeInterface
         return array(
             'StringContains',
             'StringNotContains',
+            'ListContains',
+            'ListNotContains',
             'LengthOf',
             'RegEx'
         );

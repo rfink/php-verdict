@@ -23,7 +23,10 @@ class StringType implements TypeInterface
      */
     public function getExcludedDrivers()
     {
-        return array();
+        return array(
+            'ListContains',
+            'ListNotContains'
+        );
     }
     
     /**

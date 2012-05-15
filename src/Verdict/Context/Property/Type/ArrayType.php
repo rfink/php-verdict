@@ -32,13 +32,8 @@ class ArrayType implements TypeInterface
     public function getIncludedDrivers()
     {
         return array(
-            'Equals',
-            'NotEquals',
-            'LengthOf',
-            'Range',
-            'RegEx',
-            'StringContains',
-            'StringNotContains'
+            'ListContains',
+            'ListNotContains'
         );
     }
 }
