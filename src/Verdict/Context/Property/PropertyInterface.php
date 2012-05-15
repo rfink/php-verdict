@@ -23,13 +23,20 @@ interface PropertyInterface
      *      }
      *   ]
      *   - to work with jQuery UI autocomplete
+     * @param array $params
      * @return array
      */
-    public function getSource();
+    public function getSource($params);
     
     /**
      * Get the type of our property
      * @return string
      */
     public function getType();
+    
+    /**
+     * Get property with given name
+     * @return mixed
+     */
+    public function getProperty($name);
 }

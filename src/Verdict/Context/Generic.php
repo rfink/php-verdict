@@ -87,6 +87,14 @@ class Generic implements ContextInterface
     }
     
     /**
+     * @inheritDoc
+     */
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+    
+    /**
      * Set value (allow this to be recursive, by using a property name separated by the delimiter)
      * @param string $key
      * @param mixed $value

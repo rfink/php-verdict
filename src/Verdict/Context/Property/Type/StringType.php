@@ -6,7 +6,7 @@
  * @since  May 15, 2012
  */
 
-namespace Verdict\Context\Property\Type\NumberType;
+namespace Verdict\Context\Property\Type;
 
 class StringType implements TypeInterface
 {

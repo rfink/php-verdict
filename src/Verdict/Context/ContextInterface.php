@@ -26,4 +26,10 @@ interface ContextInterface
      * @return ContextInterface
      */
     public function setValue($key, $value);
+
+    /**
+     * Get array of properties
+     * @return array
+     */
+    public function getProperties();
 }

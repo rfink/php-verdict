@@ -10,7 +10,9 @@
 namespace Verdict\Context\Property;
 
 use Verdict\Context\ContextInterface,
-    ReflectionFunction;
+    Verdict\Context\Property\Type\StringType,
+    ReflectionFunction,
+    BadMethodCallException;
 
 class Generic implements PropertyInterface, ContextInterface
 {
@@ -26,18 +28,15 @@ class Generic implements PropertyInterface, ContextInterface
      */
     public function __construct(array $properties = array())
     {
+        $type = isset($properties['type']) ? $properties['type'] : new StringType();
         $this->properties = array_merge(array(
             'value' => null,
-            'getSource' => null,
+            'getSource' => is_callable(array($type, 'getSource')) ? array($type, 'getSource') : null,
             'getValue' => null,
-            'type' => 'string',
-            'isRestrictedSet' => false,
-            'excludedDrivers' => array(
-                
-            ),
-            'includedDrivers' => array(
-                
-            )
+            'type' => $type,
+            'isRestrictedSet' => $type->isRestrictedSet(),
+            'excludedDrivers' => $type->getExcludedDrivers(),
+            'includedDrivers' => $type->getIncludedDrivers()
         ), $properties);
     }
 
@@ -69,12 +68,12 @@ class Generic implements PropertyInterface, ContextInterface
     /**
      * @inheritDoc
      */
-    public function getSource()
+    public function getSource($params)
     {
         if (is_callable($this->properties['getSource']))
         {
             $reflect = new ReflectionFunction($this->properties['getSource']);
-            return $reflect->invoke($this);
+            return $reflect->invoke($params);
         }
         return null;
     }
@@ -85,5 +84,25 @@ class Generic implements PropertyInterface, ContextInterface
     public function getType()
     {
         return $this->properties['type'];
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getProperty($name)
+    {
+        if (isset($this->properties[$name]))
+        {
+            return $this->properties[$name];
+        }
+        return null;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getProperties()
+    {
+        throw new BadMethodCallException('Not available for properties');
     }
 }

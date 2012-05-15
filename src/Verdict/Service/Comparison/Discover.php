@@ -58,7 +58,7 @@ class Discover
                     continue;
                 }
                 $reflectMethod = $reflectClass->getMethod('getDisplay');
-                $this->comparisonCache[$className] = $reflectMethod->invoke(null);
+                $this->comparisonCache[lcfirst($className)] = $reflectMethod->invoke(null);
             }
         }
         return $this->comparisonCache;
