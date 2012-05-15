@@ -14,6 +14,24 @@ use DirectoryIterator,
 class Discover
 {
     /**
+     * TODO: Make sort order an annotation, and a command line compiler for the comparison discover service
+     * @var array
+     */
+    private $sortOrder = array(
+        'Equals',
+        'NotEquals',
+        'LessThan',
+        'GreaterThan',
+        'LessThanEqualTo',
+        'GreaterThanEqualTo',
+        'StringContains',
+        'StringNotContains',
+        'RegEx',
+        'LengthOf',
+        'Range',
+        'Truth'
+    );
+    /**
      * Cache of comparison objects available
      * @var array
      */
@@ -33,7 +51,7 @@ class Discover
      * Get our comparison data by scanning our comparison directory
      * @return array
      */
-    public function getComparisons()
+    public function toJson()
     {
         // Add our current directory pointer to the array (can't be done in property definition)
         array_unshift($this->comparisonDir, dirname(__FILE__));
@@ -60,6 +78,12 @@ class Discover
                 $reflectMethod = $reflectClass->getMethod('getDisplay');
                 $this->comparisonCache[lcfirst($className)] = $reflectMethod->invoke(null);
             }
+            // First, lowercase our sort order array
+            $sortOrder = array_map('lcfirst', $this->sortOrder);
+            // Next, sort our keys based on their position inside our sort order array
+            uksort($this->comparisonCache, function($a, $b) use ($sortOrder) {
+                return array_search($a, $sortOrder) - array_search($b, $sortOrder);
+            });
         }
         return $this->comparisonCache;
     }
