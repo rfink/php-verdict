@@ -13,7 +13,6 @@ use Verdict\Context\ContextInterface,
     Verdict\Filter\Comparison\Truth,
     ArrayIterator,
     ReflectionClass,
-    JSON_ERROR_NONE,
     RuntimeException,
     InvalidArgumentException;
 
