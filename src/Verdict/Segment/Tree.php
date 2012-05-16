@@ -267,7 +267,7 @@ class Tree implements SegmentInterface
         $this->each(function($segment) use (& $segments) {
             if ($segment->isLeafNode())
             {
-                $segments[] = segment;
+                $segments[] = $segment;
             }
         });
         return $segments;

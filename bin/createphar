@@ -1,0 +1,23 @@
+#!/usr/local/bin/php
+
+<?php
+
+$location = realpath(dirname(__FILE__) . '/../src');
+$phar = new Phar('../verdict.phar');
+$phar->compressFiles(Phar::GZ);
+$phar->setSignatureAlgorithm(Phar::SHA1);
+$files = array();
+//$files['stub.php'] = 'stub.php';
+
+foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($location)) as $file)
+{
+    if (stripos($file->getFilename(), '..') !== false)
+    {
+        continue;
+    }
+    $files[$file->getPath() . DIRECTORY_SEPARATOR . $file->getFilename()] = $file->getPath() . DIRECTORY_SEPARATOR . $file->getFilename();
+}
+
+$phar->startBuffering();
+$phar->buildFromIterator(new ArrayIterator($files));
+$phar->stopBuffering();
