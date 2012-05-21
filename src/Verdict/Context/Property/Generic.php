@@ -56,12 +56,9 @@ class Generic implements PropertyInterface, ContextInterface
     /**
      * @inheritDoc
      */
-    public function setValue($key, $value)
+    public function setValue($value)
     {
-        if (isset($this->properties[$key]))
-        {
-            $this->properties[$key]->setValue($key, $value);
-        }
+        $this->properties['value'] = $value;
         return $this;
     }
 

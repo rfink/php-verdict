@@ -109,7 +109,7 @@ class Generic implements ContextInterface
     public function setValue($key, $value)
     {
         $ref = $this->getPropertyReference($key);
-        $ref->setValue($name, $value);
+        $ref->setValue($value);
         return $this;
     }
     
@@ -160,7 +160,7 @@ class Generic implements ContextInterface
                 }
                 else
                 {
-                    $property->setValue($key, $data[$key]);
+                    $property->setValue($data[$key]);
                 }
             }
         }
