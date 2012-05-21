@@ -27,11 +27,12 @@ class Generic implements ContextInterface
     
     /**
      * Convenience constructor, pass in an array for this to auto-create a generic nested context object
+     * @param array $buildData
      * @param array $data
      */
-    public function __construct(array $data = array())
+    public function __construct(array $buildData = array(), array $data = null)
     {
-        foreach ($data as $key => $value)
+        foreach ($buildData as $key => $value)
         {
             // If we have a property, treat it as such
             if ($value instanceof PropertyInterface)
@@ -43,6 +44,11 @@ class Generic implements ContextInterface
             {
                 $this->addElement($key, new static($value));
             }
+        }
+        // If contextual data was passed in, merge it
+        if (isset($data))
+        {
+            $this->mergeInto($this->properties, $data);
         }
     }
     
