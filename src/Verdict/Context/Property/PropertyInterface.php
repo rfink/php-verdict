@@ -8,6 +8,8 @@
 
 namespace Verdict\Context\Property;
 
+use Verdict\Context\ContextInterface;
+
 interface PropertyInterface
 {    
     /**
@@ -33,6 +35,13 @@ interface PropertyInterface
      * @return string
      */
     public function getType();
+    
+    /**
+     * Get our value (either by calling a function or just returning the raw value)
+     * @param ContextInterface $context
+     * @return mixed
+     */
+    public function getValue(ContextInterface $context);
     
     /**
      * Get property with given name

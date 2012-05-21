@@ -18,6 +18,14 @@ interface ContextInterface
      * @return string
      */
     public function getValue($key);
+    
+    /**
+     * Set our value on the context object
+     * @param string $key
+     * @param mixed $value
+     * @return ContextInterface
+     */
+    public function setValue($key, $value);
 
     /**
      * Get array of properties

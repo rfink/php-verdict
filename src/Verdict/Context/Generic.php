@@ -60,7 +60,7 @@ class Generic implements ContextInterface
     public function getValue($key)
     {
         $ref = $this->getPropertyReference($key);
-        return $ref->getValue($key);
+        return $ref->getValue($this);
     }
     
     /**
@@ -115,10 +115,10 @@ class Generic implements ContextInterface
     
     /**
      * Add a context/property element
-     * @param ContextInterface $element
+     * @param ContextInterface|PropertyInterface $element
      * @return Generic 
      */
-    public function addElement($key, ContextInterface $element)
+    public function addElement($key, $element)
     {
         $this->properties[$key] = $element;
         return $this;

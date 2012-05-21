@@ -14,7 +14,7 @@ use Verdict\Context\ContextInterface,
     ReflectionFunction,
     BadMethodCallException;
 
-class Generic implements PropertyInterface, ContextInterface
+class Generic implements PropertyInterface
 {
     /**
      * Array of object properties
@@ -43,12 +43,12 @@ class Generic implements PropertyInterface, ContextInterface
     /**
      * @inheritDoc
      */
-    public function getValue($key)
+    public function getValue(ContextInterface $context)
     {
         if (is_callable($this->properties['getValue']))
         {
             $reflect = new ReflectionFunction($this->properties['getValue']);
-            return $reflect->invoke($this);
+            return $reflect->invoke($context);
         }
         return $this->properties['value'];
     }
