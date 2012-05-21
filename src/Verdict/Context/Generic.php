@@ -154,7 +154,7 @@ class Generic implements ContextInterface
             if (isset($data[$key]))
             {
                 // If we have an array and the current property context is a property (and not another context)
-                if (is_array($data[$key]) && $property instanceof PropertyInterface)
+                if (is_array($data[$key]) && !($property instanceof PropertyInterface))
                 {
                     $this->mergeInto($data[$key], $property);
                 }
