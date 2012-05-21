@@ -41,7 +41,7 @@ class Validator
     }
     
     /**
-     *
+     * Validate given segment tree (or subtree, whatever it happens to be)
      * @param Tree $tree 
      * @return void
      * @throws RuntimeException
