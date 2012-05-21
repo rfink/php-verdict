@@ -55,8 +55,8 @@ class Validator
             {
                 break;
             }
-            $condition = $children[$i].getCondition();
-            $segmentName = $children[$i].getSegmentName();
+            $condition = $children[$i]->getCondition();
+            $segmentName = $children[$i]->getSegmentName();
             if (!(isset($condition)))
             {
                 throw new RuntimeException('The segment ' . $segmentName . ' is not a default node, but has no valid condition');
