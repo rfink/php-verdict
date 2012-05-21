@@ -130,6 +130,38 @@ class Generic implements ContextInterface
     }
     
     /**
+     * Recursive population method
+     * @param array $data
+     * @param array $authority
+     * @return Generic
+     */
+    public function mergeInto(array $data, array $authority = null)
+    {
+        if (!isset($authority))
+        {
+            $authority = $this->properties;
+        }
+        // Iterate our data, determine if we need to set the value or recurse into another array
+        foreach($authority as $key => $property)
+        {
+            // If we are merging this property in
+            if (isset($data[$key]))
+            {
+                // If we have an array and the current property context is a property (and not another context)
+                if (is_array($data[$key]) && $property instanceof PropertyInterface)
+                {
+                    $this->mergeInto($data[$key], $property);
+                }
+                else
+                {
+                    $property->setValue($key, $data[$key]);
+                }
+            }
+        }
+        return $this;
+    }
+    
+    /**
      * Recursive method for digging into a key and returning the nested reference
      * @param string $key
      * @return PropertyInterface
