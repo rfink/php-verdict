@@ -102,14 +102,14 @@ class Json implements FactoryInterface
                 // First, check if we have configured a 'config value'
                 if (array_key_exists('configValue', $data))
                 {
-                    $properties['configValue'] = $data['configValue'];
+                    $properties['configValue'] = is_string($data['configValue']) ? strtolower($data['configValue']) : $data['configValue'];
                 }
                 // Other params to the method call, attach them to our array
                 if (is_array($data['params']))
                 {
                     foreach ($data['params'] as $key => $val)
                     {
-                        $properties[$key] = $val;
+                        $properties[$key] = is_string($val) ? strtolower($val) : $val;
                     }
                 }
                 return $reflect->newInstance($this->context, $data['contextKey'], $properties);

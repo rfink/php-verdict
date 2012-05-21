@@ -58,7 +58,19 @@ class Generic implements PropertyInterface
      */
     public function setValue($value)
     {
-        $this->properties['value'] = $value;
+        // TODO: Make this behavior configurable, or make a setter object
+        if (is_string($value))
+        {
+            $this->properties['value'] = strtolower($value);
+        }
+        else if (is_array($value))
+        {
+            $this->properties['value'] = array_map('strtolower', $value);
+        }
+        else
+        {
+            $this->properties['value'] = $value;
+        }
         return $this;
     }
 
