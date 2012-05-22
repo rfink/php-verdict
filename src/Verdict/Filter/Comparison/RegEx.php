@@ -24,7 +24,7 @@ class RegEx extends ComparisonAbstract implements FilterInterface, ComparisonInt
      */
 	public function evaluate()
 	{
-		return (boolean) preg_match('/' . preg_quote($this->params['configValue'], '/') . '/', $this->context->getValue($this->contextKey));
+		return (boolean) preg_match('/' . $this->params['configValue'] . '/', $this->context->getValue($this->contextKey));
 	}
     
     /**

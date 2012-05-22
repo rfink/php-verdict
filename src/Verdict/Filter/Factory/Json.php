@@ -32,9 +32,10 @@ class Json implements FactoryInterface
     
     /**
      * Instantiate our object
+     * @param ContextInterface $context
      * @param type $json 
      */
-    public function __construct(ContextInterface $context, $json)
+    public function __construct(ContextInterface $context, $json = null)
     {
         $this->context = $context;
         if (!isset($json))
