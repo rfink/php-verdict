@@ -2,7 +2,7 @@
 
 namespace Tests\Verdict\Service;
 
-require_once('../../autoloader.php');
+require_once(__DIR__ . '/../../autoloader.php');
 
 use Verdict\Service\Comparison\Discover,
     PHPUnit_Framework_TestCase;

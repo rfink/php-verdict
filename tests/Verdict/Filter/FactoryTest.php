@@ -2,7 +2,7 @@
 
 namespace Tests\Verdict\Filter;
 
-require_once('../../autoloader.php');
+require_once(__DIR__ . '/../../autoloader.php');
 
 use Verdict\Context\Generic as GenericContext,
     Verdict\Context\Property\Generic as GenericProperty,

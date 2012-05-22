@@ -2,7 +2,7 @@
 
 namespace Tests\Verdict\Filter;
 
-require_once('../../autoloader.php');
+require_once(__DIR__ . '/../../autoloader.php');
 
 use Verdict\Filter\Composite\All,
     Verdict\Filter\Composite\Any,
