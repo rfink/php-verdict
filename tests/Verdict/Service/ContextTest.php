@@ -12,6 +12,7 @@ use Verdict\Context\Generic as GenericContext,
     Verdict\Context\Property\Type\BooleanType,
     Verdict\Context\Property\Type\ArrayType,
     Verdict\Service\Context\Discover,
+    Verdict\Service\Context\Condensor,
     PHPUnit_Framework_TestCase;
 
 class ContextTest extends PHPUnit_Framework_TestCase
@@ -48,5 +49,40 @@ class ContextTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($contextJson['Namespaced']['Date']['type'], 'date');
         $this->assertEquals($contextJson['Namespaced']['Boolean']['type'], 'boolean');
         $this->assertEquals($contextJson['Namespaced']['Array']['type'], 'array');
+    }
+    
+    /**
+     * Test our condensor service for appropriate behavior
+     * @return void
+     */
+    public function testCondensorService()
+    {
+        $discoverService = new Discover();
+        $context = new GenericContext(array(
+            'TestParent' => array(
+                'Child' => new GenericProperty(array(
+                    'type' => new NumberType()
+                ))
+            ),
+            'TestGrandParent' => array(
+                'TestParent' => array(
+                    'Child1' => new GenericProperty(array(
+                        'type' => new NumberType()
+                    )),
+                    'Child2' => new GenericProperty(array(
+                        'type' => new NumberType()
+                    ))
+                )
+            ),
+            'TestChild' => new GenericProperty(array(
+                'type' => new NumberType()
+            ))
+        ));
+        $condensorService = new Condensor();
+        $flatContext = $condensorService->condenseVars($discoverService->toJson($context));
+        $this->assertEquals(count($flatContext), 4);
+        $this->assertArrayHasKey('TestParent::Child', $flatContext);
+        $this->assertArrayHasKey('TestGrandParent::TestParent::Child1', $flatContext);
+        $this->assertArrayHasKey('TestChild', $flatContext);
     }
 }
