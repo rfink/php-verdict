@@ -13,7 +13,7 @@ use Verdict\Segment\Tree,
     Verdict\Context\ContextInterface,
     Verdict\Filter\Factory\Json as FilterFactory;
 
-class Json
+class Json implements FactoryInterface
 {
     
     /**
