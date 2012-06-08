@@ -224,6 +224,38 @@ class Tree implements SegmentInterface
     }
     
     /**
+     * Get an array of all leaf nodes that evaluate to true
+     * @return array
+     */
+    public function runAllLeafNodes()
+    {
+        $matchingNodes = array();
+        return $this->walkAllNodes($this, $matchingNodes);
+    }
+    
+    /**
+     * Walk all nodes, append to an array each one that evaluates to true, and then return
+     * @param Tree $segment
+     * @param array $matchingNodes
+     * @return array
+     */
+    private function walkAllNodes(Tree $segment, & $matchingNodes)
+    {
+        if ($segment->evaluateCondition())
+        {
+            if ($segment->isLeafNode())
+            {
+                $matchingNodes[] = $segment;
+            }
+        }
+        foreach ($segment->getChildren() as $child)
+        {
+            $this->walkAllNodes($child, $matchingNodes);
+        }
+        return $matchingNodes;
+    }
+    
+    /**
      * Private method, does the brunt of getLeafNode, but is separate to allow recursion
      * @param Tree $segment
      * @param array $path

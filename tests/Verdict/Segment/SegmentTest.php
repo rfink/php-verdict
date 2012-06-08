@@ -12,6 +12,7 @@ use Verdict\Context\Generic as GenericContext,
     Verdict\Context\Property\Type\BooleanType,
     Verdict\Context\Property\Type\ArrayType,
     Verdict\Segment\Tree,
+    Verdict\Segment\Factory\Json as SegmentFactory,
     Verdict\Filter\Comparison\Equals,
     Verdict\Filter\Comparison\Truth,
     PHPUnit_Framework_TestCase,
@@ -114,6 +115,85 @@ class SegmentTest extends PHPUnit_Framework_TestCase
         foreach ($leaves as $leaf)
         {
             $this->assertInstanceOf('Verdict\Segment\Tree', $leaf);
+        }
+    }
+    
+    /**
+     * Test running all leaf nodes, making sure we only match valid conditions
+     * @return void
+     */
+    public function testRunAllLeafNodes()
+    {
+        $factory = new SegmentFactory(array(
+            'segmentId' => '1',
+            'segmentName' => 'Root',
+            'Condition' => null,
+            'children' => array(
+                array(
+                    'segmentId' => '2',
+                    'segmentName' => 'Def 1',
+                    'Condition' => array(
+                        'nodeType' => 'comparison',
+                        'nodeDriver' => 'equals',
+                        'contextKey' => 'Namespaced::Number',
+                        'configValue' => 2
+                    ),
+                    'children' => array(
+                        array(
+                            'segmentId' => '3',
+                            'segmentName' => 'Def 2',
+                            'Condition' => array(
+                                'nodeType' => 'comparison',
+                                'nodeDriver' => 'equals',
+                                'contextKey' => 'Namespaced::Number',
+                                'configValue' => 3
+                            ),
+                            'children' => array()
+                        )
+                    )
+                ),
+                array(
+                    'segmentId' => '4',
+                    'segmentName' => 'Def 3',
+                    'Condition' => array(
+                        'nodeType' => 'comparison',
+                        'nodeDriver' => 'truth',
+                        'contextKey' => null,
+                        'configValue' => null
+                    ),
+                    'children' => array()
+                ),
+                array(
+                    'segmentId' => '5',
+                    'segmentName' => 'Def 4',
+                    'Condition' => array(
+                        'nodeType' => 'comparison',
+                        'nodeDriver' => 'truth',
+                        'contextKey' => null,
+                        'configValue' => null
+                    ),
+                    'children' => array(
+                        array(
+                            'segmentId' => '6',
+                            'segmentName' => 'Def 5',
+                            'Condition' => array(
+                                'nodeType' => 'comparison',
+                                'nodeDriver' => 'truth',
+                                'contextKey' => null,
+                                'configValue' => null
+                            ),
+                            'children' => array()
+                        )
+                    )
+                )
+            )
+        ), $this->context);
+        $tree = $factory->build();
+        $matchingNodes = $tree->runAllLeafNodes();
+        $this->assertEquals(count($matchingNodes), 2);
+        foreach ($matchingNodes as $node)
+        {
+            $this->assertTrue($node->isLeafNode());
         }
     }
     
