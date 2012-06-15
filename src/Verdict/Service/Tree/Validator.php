@@ -64,7 +64,7 @@ class Validator
             $conditionType = $this->getConditionType($condition);
             if ($conditionType === 'composite')
             {
-                $this->validateComposite($condition);
+                $this->validateComposite($condition, $segmentName);
             }
             else if ($conditionType === 'comparison')
             {
@@ -101,12 +101,12 @@ class Validator
      * @return void
      * @throws RuntimeException
      */
-    private function validateComposite(FilterInterace $condition, $segmentName)
+    private function validateComposite(FilterInterface $condition, $segmentName)
     {
         $conditionType = $this->getConditionType($condition);
         if ($conditionType === 'composite')
         {
-            $children = $condition->getChildren();
+            $children = $condition->getItems();
             if (!count($children))
             {
                 throw new RuntimeException('The segment ' . $segmentName . ' has a composite condition but no children');

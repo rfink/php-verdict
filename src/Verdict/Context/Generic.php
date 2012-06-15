@@ -10,7 +10,8 @@
 namespace Verdict\Context;
 
 use Verdict\Context\Property\PropertyInterface,
-    Verdict\Context\Property\Generic as GenericProperty;
+    Verdict\Context\Property\Generic as GenericProperty,
+	InvalidArgumentException;
 
 class Generic implements ContextInterface
 {
@@ -56,10 +57,19 @@ class Generic implements ContextInterface
      * Get value (recursive)
      * @param type $key
      * @return mixed
+	 * @throws InvalidArgumentException
      */
     public function getValue($key)
     {
+		if (empty($key))
+		{
+			throw new InvalidArgumentException('Empty key supplied');
+		}
         $ref = $this->getPropertyReference($key);
+		if (!isset($ref))
+		{
+			throw new InvalidArgumentException('Key ' . $key . ' was not found');
+		}
         return $ref->getValue($this);
     }
     
@@ -171,15 +181,24 @@ class Generic implements ContextInterface
      * Recursive method for digging into a key and returning the nested reference
      * @param string $key
      * @return PropertyInterface
+     * @throws InvalidArgumentException
      */
     private function getPropertyReference($key)
     {
         $props = explode($this->delimiter, $key);
         $name = array_shift($props);
+        if (!isset($this->properties[$name]))
+        {
+            throw new InvalidArgumentException('Invalid keyspace provided (' . $name . ')');
+        }
         $ref = $this->properties[$name];
         while($name = array_shift($props))
         {
             $ref = $ref->getProperty($name);
+            if (!isset($ref))
+            {
+                throw new InvalidArgumentException('Invalid keyspace provided (' . $name . ')');
+            }
         }
         return $ref;
     }
