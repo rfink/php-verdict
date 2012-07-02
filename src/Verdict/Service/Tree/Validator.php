@@ -88,7 +88,7 @@ class Validator
             throw new RuntimeException('The segment ' . $segmentName . ' is not a default node, but has an "always true" condition.');
         }
         $contextKey = $condition->getContextKey();
-        if (!isset($contextKey))
+        if (!strlen($contextKey))
         {
             throw new RuntimeException('The segment ' . $segmentName . ' has an empty or invalid context key.');
         }
