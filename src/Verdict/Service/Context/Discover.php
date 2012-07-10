@@ -47,9 +47,8 @@ class Discover
                     'isContextProperty' => true
                 );
                 // Strip the namespace
-                $propertyType = $property->getType();
-                $propertyClass =  get_class($propertyType);
-                $className = array_pop(explode('\\', $propertyClass));
+                $classPath =  explode('\\', get_class($property->getType()));
+                $className = array_pop($classPath);
                 // Lowercase the first letter, get rid of the "type" suffix
                 $ret[$key]['type'] = lcfirst(str_replace('Type', '', $className));
             }
