@@ -106,7 +106,7 @@ class Json implements FactoryInterface
                     $properties['configValue'] = is_string($data['configValue']) ? strtolower($data['configValue']) : $data['configValue'];
                 }
                 // Other params to the method call, attach them to our array
-                if (is_array($data['params']))
+                if (isset($data['params']) && is_array($data['params']))
                 {
                     foreach ($data['params'] as $key => $val)
                     {
